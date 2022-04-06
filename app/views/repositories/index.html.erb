@@ -1,0 +1,43 @@
+<div>
+    <h1> List Repositories </h1>
+
+    <div class='search_field'>
+        <%= form_with ur: '/', method: 'get' do |form| %>
+            <%= label :search, 'Search' %>
+            <%= form.text_field :search, value: params[:search] %>
+            <%= form.label :page, 'Page' %>
+            <%= form.text_field :page, value: params[:page] || Rails.configuration.default_page %>
+            <%= form.label :per_page, 'Page size' %>
+            <%= form.text_field :per_page, value: params[:per_page] || Rails.configuration.default_per_page %>
+            <%= form.submit 'Search', name: nil %>
+        <% end %>
+    </div>
+
+    </br>
+
+    <% if @error %>
+         <div>  <%= @error %> </div>
+    <% else %>
+        <% if @repositories.present? && @repositories[:total_count] > 0 %>
+            <div>
+                Displaying <%= params[:per_page] %> out of <%= @repositories[:total_count] %> results
+            </div>
+
+            </br>
+
+            <div>
+                <table>
+                    <%= render partial: 'header' %>
+
+                    <% @repositories[:items].each do |repo| %>
+                        <%= cache(repo, expires_in: 1.minute) do %>
+                            <%= render partial: 'repo_details', locals: { repo: repo } %>
+                        <% end %>
+                    <% end %>
+                </table>
+            </div>
+        <% else %>
+        <div>  No repositories to display </div>
+        <% end %>
+    <% end %>
+</div>

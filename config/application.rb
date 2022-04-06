@@ -33,5 +33,9 @@ module ListRepositories
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.github_repo_url = 'https://api.github.com/search/repositories'
+    config.default_page = 1
+    config.default_per_page = 10
   end
 end

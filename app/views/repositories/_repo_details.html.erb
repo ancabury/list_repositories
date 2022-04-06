@@ -1,0 +1,10 @@
+<tr>
+    <% repository = Repository.new(repo) %>
+
+    <td style="padding-right: 10px"> <%= repository.full_name %> </td>
+    <td style="padding-right: 10px"> <%= repository.owner_login %> </td>
+    <td style="padding-right: 10px"> <%= repository.repo_updated_at %> </td>
+    <td style="padding-right: 10px"> <%= repository.html_url %> </td>
+    <td style="padding-right: 10px"> <%= repository.license_name %> </td>
+    <td style="padding-right: 10px"> <%= repository.watchers %> </td>
+</tr>
